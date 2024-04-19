@@ -1,0 +1,578 @@
+{
+	"info": {
+		"_postman_id": "7670c6ce-7064-42b0-9846-7508d16a350c",
+		"name": "Release Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6031620"
+	},
+	"item": [
+		{
+			"name": "Spotify",
+			"item": [
+				{
+					"name": "_Get Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"SpotifyAccessToken\", pm.response.json().access_token);",
+									"",
+									"let template = `",
+									"<html>",
+									"<head>",
+									"    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js\"></script>",
+									"    <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js\"></script>",
+									"</head>",
+									"<body>",
+									"    <div>",
+									"    <div>",
+									"        <pre><code style=\"width:max-content!important;\" id=\"copyText\">${pm.environment.get('SpotifyAccessToken')}</code></pre>",
+									"    </div>",
+									"    <button class=\"copyButton\" type=\"button\" data-clipboard-action=\"copy\" data-clipboard-target=\"#copyText\" style=\"background:green;color:white;\">Copy to Clipboard</button>",
+									"    </div>",
+									"</body>",
+									"</html>",
+									"<script>",
+									"    var clipboard = new ClipboardJS('.copyButton');",
+									"",
+									"    clipboard.on('success', function(e) {",
+									"        e.clearSelection();",
+									"        e.trigger.textContent = '✔ Copied!';",
+									"        window.setTimeout(function() {",
+									"            e.trigger.textContent = 'Copy to Clipboard';",
+									"        }, 2000);",
+									"    });",
+									"    clipboard.on('error', function(e) {",
+									"        e.clearSelection();",
+									"        e.trigger.textContent = '✗ Not Copied';",
+									"        window.setTimeout(function() {",
+									"            e.trigger.textContent = 'Copy to Clipboard';",
+									"        }, 2000);",
+									"    });",
+									"",
+									"</script>`",
+									"",
+									"pm.visualizer.set(template, pm.response.json())"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{SpotifyClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{SpotifyClientSecret}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://accounts.spotify.com/api/token",
+							"protocol": "https",
+							"host": [
+								"accounts",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"api",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Artist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SpotifyAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.spotify.com/v1/search?q=Yoe Mase&type=artist",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"v1",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Yoe Mase"
+								},
+								{
+									"key": "type",
+									"value": "artist"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Artist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SpotifyAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.spotify.com/v1/artists/:id",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"v1",
+								"artists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4IuWSIEfIed8aZb49YA4Cj",
+									"description": "4IuWSIEfIed8aZb49YA4Cj - Yoe Mase"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Albums from Artist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SpotifyAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.spotify.com/v1/artists/:id/albums",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"v1",
+								"artists",
+								":id",
+								"albums"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4IuWSIEfIed8aZb49YA4Cj",
+									"description": "4IuWSIEfIed8aZb49YA4Cj - Yoe Mase"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Album Tracks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SpotifyAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.spotify.com/v1/albums/:id/tracks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"v1",
+								"albums",
+								":id",
+								"tracks"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1z5MV7LB7DhGfX7mBFe2w2",
+									"description": "1z5MV7LB7DhGfX7mBFe2w2 - Yoe Mase - Life In Boxes"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Track",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SpotifyAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.spotify.com/v1/albums/:id/tracks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spotify",
+								"com"
+							],
+							"path": [
+								"v1",
+								"albums",
+								":id",
+								"tracks"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5UXuIvkgkpE4YAaFr2gobJ",
+									"description": "5UXuIvkgkpE4YAaFr2gobJ - Yoe Mase - Lonely"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "YouTube",
+			"item": [
+				{
+					"name": "Search Channels",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{YoutubeApiKey}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "key",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.googleapis.com/youtube/v3/search?part=snippet&type=channels&maxResults=10&q=Yoe Mase",
+							"protocol": "https",
+							"host": [
+								"www",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"youtube",
+								"v3",
+								"search"
+							],
+							"query": [
+								{
+									"key": "part",
+									"value": "snippet"
+								},
+								{
+									"key": "type",
+									"value": "channels"
+								},
+								{
+									"key": "maxResults",
+									"value": "10"
+								},
+								{
+									"key": "q",
+									"value": "Yoe Mase"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Videos from Channel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.googleapis.com/youtube/v3/search?key={{YoutubeApiKey}}&channelId=UCwYgb4Cf4wtkgUbo4ufz59A&part=snippet,id&order=date&maxResults=20",
+							"protocol": "https",
+							"host": [
+								"www",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"youtube",
+								"v3",
+								"search"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{YoutubeApiKey}}"
+								},
+								{
+									"key": "channelId",
+									"value": "UCwYgb4Cf4wtkgUbo4ufz59A",
+									"description": "UCwYgb4Cf4wtkgUbo4ufz59A - Yoe Mase"
+								},
+								{
+									"key": "part",
+									"value": "snippet,id"
+								},
+								{
+									"key": "order",
+									"value": "date"
+								},
+								{
+									"key": "maxResults",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SoundCloud",
+			"item": [
+				{
+					"name": "_Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"SoundCloudAccessToken\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic {{SoundCloudBase64Encoded}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://secure.soundcloud.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"secure",
+								"soundcloud",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Artists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth {{SoundCloudAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.soundcloud.com/users?q=Yoe Mase",
+							"protocol": "https",
+							"host": [
+								"api",
+								"soundcloud",
+								"com"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Yoe Mase"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tracks from Artist",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth {{SoundCloudAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.soundcloud.com/users/:id/tracks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"soundcloud",
+								"com"
+							],
+							"path": [
+								"users",
+								":id",
+								"tracks"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "33625786",
+									"description": "33625786 - Yoe Mase"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Playlists from Artist",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "OAuth {{SoundCloudAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.soundcloud.com/users/:id/playlists",
+							"protocol": "https",
+							"host": [
+								"api",
+								"soundcloud",
+								"com"
+							],
+							"path": [
+								"users",
+								":id",
+								"playlists"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "33625786",
+									"description": "33625786 - Yoe Mase"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
