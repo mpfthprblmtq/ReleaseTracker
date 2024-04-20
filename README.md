@@ -16,3 +16,33 @@ on the dashboard to get those artists' new tracks.
 Just some random ideas to throw around:
 - Embedded players to play the track in the app
 - Could have social media connections (hard maybe)
+
+## Feature Roadmap
+
+### Phase I
+* [Main project set up](https://github.com/mpfthprblmtq/ReleaseTracker/issues/1)
+  * Import all necessary libraries (Axios, MUI, Redux, etc.)
+* Create hooks for [Spotify](https://github.com/mpfthprblmtq/ReleaseTracker/issues/2), [SoundCloud](https://github.com/mpfthprblmtq/ReleaseTracker/issues/3) and [YouTube](https://github.com/mpfthprblmtq/ReleaseTracker/issues/4)
+* [Create dashboard page with hardcoded artist ids](https://github.com/mpfthprblmtq/ReleaseTracker/issues/7)
+* Determine if any of these APIs are behind CORS
+  * Might be a good argument for a backend?
+
+### Phase II
+* [Decide on a data storage solution](https://github.com/mpfthprblmtq/ReleaseTracker/issues/5)
+  * AWS DynamoDB?  PostgreSQL?
+* [Decide on an authentication solution](https://github.com/mpfthprblmtq/ReleaseTracker/issues/6)
+  * Auth0?
+* Tracking page
+  * Users can input artists to follow
+  * Can modify and delete those artists
+* Categories
+  * Can set artists to folders/genres and filter on those artists in the dashboard
+
+### Phase III
+* Authentication
+* Hosting?
+* Embedded players?
+* MVP complete
+
+### Phase IV
+* Any other ideas/features
