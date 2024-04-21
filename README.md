@@ -32,7 +32,7 @@ Just some random ideas to throw around:
   * AWS DynamoDB?  PostgreSQL?
 * [Decide on an authentication solution](https://github.com/mpfthprblmtq/ReleaseTracker/issues/6)
   * Auth0?
-* Tracking page
+* [Tracking page](https://github.com/mpfthprblmtq/ReleaseTracker/issues/8)
   * Users can input artists to follow
   * Can modify and delete those artists
 * Categories
