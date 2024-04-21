@@ -35,7 +35,7 @@ Just some random ideas to throw around:
 * [Tracking page](https://github.com/mpfthprblmtq/ReleaseTracker/issues/8)
   * Users can input artists to follow
   * Can modify and delete those artists
-* Categories
+* [Categories](https://github.com/mpfthprblmtq/ReleaseTracker/issues/9)
   * Can set artists to folders/genres and filter on those artists in the dashboard
 
 ### Phase III
