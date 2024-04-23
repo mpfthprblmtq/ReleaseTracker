@@ -1,3 +1,7 @@
+/**
+ * Searches for the cookie and returns it if it can.
+ * @param key the key to search for
+ */
 export const getCookie = (key: string): string | undefined => {
   const cookies = document.cookie.split(';');
 
@@ -14,6 +18,12 @@ export const getCookie = (key: string): string | undefined => {
   return undefined;
 }
 
+/**
+ * Sets a cookie.
+ * @param key the key to set the cookie with
+ * @param value the value of the cookie
+ * @param options (optional) the options to set the cookie with
+ */
 export const setCookie = (key: string, value: any, options?: any) => {
   options = options || {};
 

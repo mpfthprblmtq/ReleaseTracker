@@ -1,6 +1,6 @@
 import {FC, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useSpotifyService} from "../hooks/useSpotifyHook.ts";
+import {useSpotifyService} from "../hooks/spotify/useSpotifyHook.ts";
 import {Button, Stack, TextField, Typography} from "@mui/material";
 import {setArtist} from "../redux/slices/artistSlice.ts";
 
