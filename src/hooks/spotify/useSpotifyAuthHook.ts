@@ -7,6 +7,7 @@ export interface SpotifyAuthHook {
 }
 
 export const useSpotifyAuthService = (): SpotifyAuthHook => {
+  const env: ImportMetaEnv = import.meta.env;
 
   /**
    * Checks to see if a cookie with the spotify access token exists.
@@ -19,14 +20,13 @@ export const useSpotifyAuthService = (): SpotifyAuthHook => {
       return existingCookie;
     } else {
       try {
-        const requestBody = new URLSearchParams();
-        requestBody.append('grant_type', 'client_credentials');
-        requestBody.append('client_id', import.meta.env.VITE_SPOTIFY_CLIENT_ID);
-        requestBody.append('client_secret', import.meta.env.VITE_SPOTIFY_CLIENT_SECRET);
-
         const response: AxiosResponse<SpotifyTokenResponse> = await axios.post(
           'https://accounts.spotify.com/api/token',
-          requestBody,
+          {
+            'grant_type': 'client_credentials',
+            'client_id': env.VITE_SPOTIFY_CLIENT_ID,
+            'client_secret': env.VITE_SPOTIFY_CLIENT_SECRET
+          },
           { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
         );
         const token = response.data;
