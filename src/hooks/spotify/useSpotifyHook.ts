@@ -61,7 +61,7 @@ export const useSpotifyService = (): SpotifyHooks => {
   const getArtist = async (id: string): Promise<SpotifyArtist> => {
     try {
       const response: AxiosResponse<SpotifyArtistResponse> = await spotifyApi.get(
-        `https://api.spotify.com/v1/artists/${id}`,
+        `/artists/${id}`,
       );
 
       const artist: any = response.data;
@@ -87,7 +87,7 @@ export const useSpotifyService = (): SpotifyHooks => {
   const getAlbumsFromArtist = async (artist: SpotifyArtist): Promise<SpotifyRelease[]> => {
     try {
       const response: AxiosResponse<SpotifyReleaseSearchResponse> = await spotifyApi.get(
-        `https://api.spotify.com/v1/artists/${artist.id}/albums`,
+        `/artists/${artist.id}/albums`,
       );
 
       return response.data.items.map(release => {
