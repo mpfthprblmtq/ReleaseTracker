@@ -21,10 +21,12 @@ export const useSoundCloudAuthService = (): SoundCloudAuthHook => {
     } else {
       try {
         const response: AxiosResponse<SoundCloudTokenResponse> = await axios.post(
-          'https://secure.soundcloud.com/oauth/token',
+          'https://proxy.cors.sh/https://secure.soundcloud.com/oauth/token',
           { 'grant_type': 'client_credentials' },
           {
             headers: {
+              // have to pass in the x-cors-api-key for cors service
+              "x-cors-api-key": "live_6aba39ccdee8ed8b73605d0e20a44856036a469b78fd9fdbb2a0399951e920a1",
               'Content-Type': 'application/x-www-form-urlencoded',
               'Authorization':
                 `Basic ${btoa(`${env.VITE_SOUNDCLOUD_CLIENT_ID}:${env.VITE_SOUNDCLOUD_CLIENT_SECRET}`)}`
